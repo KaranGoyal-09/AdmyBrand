@@ -1,148 +1,111 @@
 'use client'
 
-import * as React from "react"
-import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { ChevronDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const Accordion = AccordionPrimitive.Root
-
-const AccordionItem = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item
-    ref={ref}
-    className={cn("border-b border-gray-200", className)}
-    {...props}
-  />
-))
-AccordionItem.displayName = "AccordionItem"
-
-const AccordionTrigger = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-6 text-left font-medium transition-all hover:text-blue-600 [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-))
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
-
-const AccordionContent = React.forwardRef<
-  React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-6 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-))
-AccordionContent.displayName = AccordionPrimitive.Content.displayName
+import { ChevronDown, HelpCircle, Sparkles, Zap, Brain, TrendingUp } from 'lucide-react'
 
 interface FAQItem {
-  id: string
   question: string
   answer: string
-  emoji: string
+  icon: React.ComponentType<{ className?: string }>
 }
 
 const faqData: FAQItem[] = [
   {
-    id: '1',
-    question: 'Can AI run my entire marketing department while I nap? 😴',
-    answer: 'Yes. But don\'t let your boss know. Our AI can handle campaign creation, optimization, and reporting while you focus on strategic decisions. Just make sure to check in occasionally to review performance!',
-    emoji: '😴'
+    question: "Can AI run my entire marketing department while I nap? 😴",
+    answer: "While our AI is incredibly powerful, we recommend staying awake to enjoy the amazing results! Our AI handles campaign creation, optimization, and scaling, but human creativity and strategy are still essential for the best outcomes.",
+    icon: Brain
   },
   {
-    id: '2',
-    question: 'What platforms do you integrate with? 🔗',
-    answer: 'We integrate with all major advertising platforms including Google Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, TikTok Ads, and more. We also support e-commerce platforms like Shopify and WooCommerce.',
-    emoji: '🔗'
+    question: "How quickly will I see results? ⚡",
+    answer: "Most customers see measurable improvements within 7-14 days. Our AI starts optimizing immediately, and you'll notice better performance, lower costs, and higher conversions right away.",
+    icon: Zap
   },
   {
-    id: '3',
-    question: 'Is there a free trial available? 🎁',
-    answer: 'Yes! We offer a 14-day free trial with full access to all features. No credit card required to start. You can upgrade to a paid plan at any time during or after the trial.',
-    emoji: '🎁'
+    question: "What if I'm not tech-savvy? 🤔",
+    answer: "No worries! Our platform is designed to be intuitive and user-friendly. Plus, our support team is available 24/7 to help you get the most out of your AI marketing assistant.",
+    icon: HelpCircle
   },
   {
-    id: '4',
-    question: 'How quickly can I see results? ⚡',
-    answer: 'Most customers see improvements within the first week of using our platform. The AI typically needs 3-7 days to gather enough data to start making optimizations. Significant ROI improvements are usually visible within 30 days.',
-    emoji: '⚡'
+    question: "Can I integrate with my existing tools? 🔗",
+    answer: "Absolutely! We integrate seamlessly with Google Ads, Facebook Ads, TikTok, LinkedIn, and most major marketing platforms. Your existing campaigns and data are safe and easily imported.",
+    icon: TrendingUp
   },
   {
-    id: '5',
-    question: 'Do you provide customer support? 🤝',
-    answer: 'Yes, we offer comprehensive customer support including email support for all plans, priority support for Pro and Enterprise plans, and dedicated account management for Enterprise customers.',
-    emoji: '🤝'
+    question: "Is my data secure? 🔒",
+    answer: "Security is our top priority. We use enterprise-grade encryption, SOC 2 compliance, and never share your data with third parties. Your campaigns and customer data are completely protected.",
+    icon: Sparkles
   },
   {
-    id: '6',
-    question: 'Can I cancel my subscription anytime? 🚪',
-    answer: 'Absolutely! You can cancel your subscription at any time from your account dashboard. There are no long-term contracts or cancellation fees. You\'ll continue to have access until the end of your current billing period.',
-    emoji: '🚪'
-  },
-  {
-    id: '7',
-    question: 'Will AI take over the world? 🤖',
-    answer: 'Only the marketing world. Our AI is focused on optimizing campaigns and improving ROI, not world domination. We promise!',
-    emoji: '🤖'
-  },
-  {
-    id: '8',
-    question: 'What if I don\'t like the AI suggestions? 🤔',
-    answer: 'You\'re always in control! You can review, modify, or reject any AI suggestions. The AI learns from your preferences to provide better recommendations over time.',
-    emoji: '🤔'
+    question: "What's included in the free trial? 🎁",
+    answer: "Your 14-day free trial includes full access to all features, unlimited campaigns, AI optimization, and our complete support. No credit card required, and you can cancel anytime.",
+    icon: Sparkles
   }
 ]
 
 export default function AccordionFAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
+
   return (
     <div className="max-w-4xl mx-auto">
-      <Accordion type="single" collapsible className="space-y-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="space-y-4"
+      >
         {faqData.map((item, index) => (
           <motion.div
-            key={item.id}
+            key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
+            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <AccordionItem value={item.id} className="glassmorphism hover:shadow-lg transition-all duration-300">
-              <AccordionTrigger className="px-6 text-lg font-semibold group">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{item.emoji}</span>
-                  <span className="group-hover:text-blue-600 transition-colors">
-                    {item.question}
-                  </span>
+            <button
+              onClick={() => toggleAccordion(index)}
+              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                  <item.icon className="w-4 h-4 text-white" />
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="px-6 text-gray-600 leading-relaxed">
-                <div className="flex items-start gap-3">
-                  <span className="text-lg mt-1">💡</span>
-                  <div>{item.answer}</div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+                <span className="font-semibold text-gray-900">
+                  {item.question}
+                </span>
+              </div>
+              <motion.div
+                animate={{ rotate: openIndex === index ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ChevronDown className="w-5 h-5 text-gray-500" />
+              </motion.div>
+            </button>
+            
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 pb-4 text-gray-600 leading-relaxed">
+                    {item.answer}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         ))}
-      </Accordion>
+      </motion.div>
     </div>
   )
 } 

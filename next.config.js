@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed deprecated appDir experimental option
+  images: {
+    domains: ['randomuser.me'],
+  },
 }
 
 module.exports = nextConfig 

@@ -1,148 +1,169 @@
 import Hero from './components/Hero'
-import FeatureCard from './components/FeatureCard'
-import PricingCard from './components/PricingCard'
-import PricingCalculator from './components/PricingCalculator'
+import Features from './components/Features'
+import Pricing from './components/Pricing'
 import TestimonialCarousel from './components/TestimonialCarousel'
 import AccordionFAQ from './components/AccordionFAQ'
 import ContactForm from './components/ContactForm'
 import Footer from './components/Footer'
-import { features } from './data/features'
-import { pricingPlans } from './data/pricing'
+import PricingCalculator from './components/PricingCalculator'
 import { testimonials } from './data/testimonials'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <Hero />
+      <section className="relative">
+        <Hero />
+      </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="features" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+          <div className="absolute top-40 right-20 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute -bottom-8 left-40 w-72 h-72 bg-gradient-to-r from-pink-400/20 to-blue-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '4s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Powerful Features for{' '}
-              <span className="gradient-text">Modern Marketing</span>
+              <span className="text-gradient-primary">Modern Marketing</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to automate, optimize, and scale your marketing campaigns with AI.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Everything you need to automate, optimize, and scale your marketing campaigns with AI-powered intelligence.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <FeatureCard key={feature.id} feature={feature} index={index} />
-            ))}
-          </div>
+          <Features />
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="pricing" className="py-20 bg-gradient-to-br from-white via-gray-50 to-purple-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-10 left-10 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '3s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Simple,{' '}
-              <span className="gradient-text">Transparent Pricing</span>
+              <span className="text-gradient-primary">Transparent Pricing</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose the plan that fits your business needs. All plans include a 14-day free trial.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Choose the plan that fits your business needs. All plans include our core AI features and 24/7 support.
             </p>
           </div>
+          <Pricing />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-            {pricingPlans.map((plan, index) => (
-              <PricingCard key={plan.id} plan={plan} index={index} />
-            ))}
+          {/* Enhanced Pricing Calculator */}
+          <div className="mt-20">
+            <PricingCalculator />
           </div>
-
-          {/* Dynamic Pricing Calculator */}
-          <PricingCalculator />
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '4s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Loved by{' '}
-              <span className="gradient-text">500+ Companies</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Trusted by{' '}
+              <span className="text-gradient-primary">500+ Companies</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               See what our customers have to say about their experience with ADmyBRAND AI Suite.
             </p>
           </div>
-          
           <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-purple-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '3s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Frequently Asked{' '}
-              <span className="gradient-text">Questions</span>
+              <span className="text-gradient-primary">Questions</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to know about our AI marketing platform.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Everything you need to know about ADmyBRAND AI Suite. Can't find the answer you're looking for? Contact our support team.
             </p>
           </div>
-          
           <AccordionFAQ />
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-20 left-20 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob" style={{ animationDelay: '4s' }}></div>
+        </div>
+        
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 Ready to{' '}
-                <span className="gradient-text">Get Started?</span>
+                <span className="text-gradient-primary">Get Started?</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Get in touch with our team to learn more about how ADmyBRAND can transform your marketing.
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Let's discuss how ADmyBRAND AI Suite can transform your marketing campaigns and drive real results for your business.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                  Let's talk about your project
+                  Get in Touch
                 </h3>
                 <p className="text-gray-600 mb-8 leading-relaxed">
-                  Our team of AI marketing experts is here to help you understand how our platform can 
-                  automate your campaigns, optimize your ad spend, and scale your growth. 
-                  We'll work with you to create a custom solution that fits your business needs.
+                  Our team is here to help you get started with AI-powered marketing. Whether you have questions about features, pricing, or implementation, we're ready to assist.
                 </p>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold">✓</span>
+                  <div className="flex items-center gap-3 text-gray-600">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                      <span className="text-blue-600 font-semibold">📧</span>
                     </div>
-                    <span className="text-gray-700">Free consultation call</span>
+                    <span>hello@admybrand.ai</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold">✓</span>
+                  <div className="flex items-center gap-3 text-gray-600">
+                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                      <span className="text-purple-600 font-semibold">📞</span>
                     </div>
-                    <span className="text-gray-700">Custom implementation plan</span>
+                    <span>+1 (555) 123-4567</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold">✓</span>
+                  <div className="flex items-center gap-3 text-gray-600">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">📍</span>
                     </div>
-                    <span className="text-gray-700">Dedicated support team</span>
+                    <span>San Francisco, CA</span>
                   </div>
                 </div>
               </div>
               
-              <ContactForm />
+              <div>
+                <ContactForm />
+              </div>
             </div>
           </div>
         </div>

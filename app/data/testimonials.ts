@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
     company: 'TechFlow Inc.',
     content: 'ADmyBRAND AI Suite transformed our marketing campaigns. We saw a 300% increase in ROI within the first quarter. The AI automation is incredible!',
     rating: 5,
-    avatar: '/avatars/sarah.jpg'
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     id: '2',
@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     company: 'GrowthStart',
     content: 'The real-time optimization feature alone paid for itself. Our ad spend efficiency improved by 150% while maintaining the same conversion rates.',
     rating: 5,
-    avatar: '/avatars/michael.jpg'
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
   {
     id: '3',
@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
     company: 'E-commerce Plus',
     content: 'Finally, a tool that actually understands our business needs. The audience targeting is spot-on and the analytics are incredibly detailed.',
     rating: 5,
-    avatar: '/avatars/emily.jpg'
+    avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
   },
   {
     id: '4',
@@ -43,6 +43,6 @@ export const testimonials: Testimonial[] = [
     company: 'ScaleUp Solutions',
     content: 'We tried many marketing tools before, but ADmyBRAND is the first one that truly delivers on its promises. Our team productivity increased by 200%.',
     rating: 5,
-    avatar: '/avatars/david.jpg'
-  }
+    avatar: 'https://randomuser.me/api/portraits/men/65.jpg',
+  },
 ] 
